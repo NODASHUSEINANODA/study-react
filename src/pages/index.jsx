@@ -3,12 +3,21 @@ import Head from "next/head";
 import { Footer } from "../components/Footer";
 import styles from "../styles/Home.module.css";
 import { Header } from "../components/Header";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 export default function Home() {
-  const handleClick = useCallback((e) => {
-    console.log(e.target.href);
-    e.preventDefault();
+  // const handleClick = useCallback((e) => {
+  //   console.log(e.target.href);
+  //   e.preventDefault();
+  // }, []);
+
+  useEffect(() => {
+    console.log("マウント時");
+    document.body.style.backgroundColor = "lightblue";
+    return () => {
+      console.log("アンマウント時");
+      document.body.style.backgroundColor = "";
+    };
   }, []);
 
   return (
@@ -19,9 +28,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <a href="/about" onClick={handleClick}>
+      {/* <a href="/about" onClick={handleClick}>
         ボタン
-      </a>
+      </a> */}
       <Main page="index" />
       <Footer />
     </div>
