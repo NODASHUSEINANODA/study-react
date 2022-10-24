@@ -6,16 +6,20 @@ import { Header } from "../components/Header";
 import { useCallback, useEffect, useState } from "react";
 
 export default function Home() {
-  const [foo, setFoo] = useState(1);
+  const [count, setCount] = useState(1);
   
-  const handleClick = (e) => {
-    setFoo((foo) => foo + 1);
-    setFoo((foo) => foo + 1);
-  };
+  const handleClick = useCallback((e) => {
+    // console.log(count);
+    if (count < 10) {
+      setCount((count) => count + 1);
+    }
+  }, [count]);
 
   useEffect(() => {
+    console.log(count);
     document.body.style.backgroundColor = "lightblue";
     return () => {
+      console.log(count);
       document.body.style.backgroundColor = "";
     };
   }, []);
@@ -28,7 +32,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <h1>{foo}</h1>
+      <h1>{count}</h1>
       <button href="/about" onClick={handleClick}>
         ボタン
       </button>
