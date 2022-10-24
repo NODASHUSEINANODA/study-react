@@ -4,7 +4,7 @@ import { Header } from '../components/Header'
 import { Main } from '../components/Main'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function about() {
   return (
     <div className={styles.container}>
       <Head>

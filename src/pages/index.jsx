@@ -3,58 +3,14 @@ import Head from "next/head";
 import { Footer } from "../components/Footer";
 import styles from "../styles/Home.module.css";
 import { Header } from "../components/Header";
-import { useCallback, useEffect, useState } from "react";
+import { useCounter } from "../hooks/useCounter";
+import { useInputArray } from "../hooks/useInputArray";
+import { useBgLightBlue } from "../hooks/useBgLightBlue";
 
 export default function Home() {
-  const [count, setCount] = useState(1);
-  const [text, setText] = useState("");
-  const [IsShow, setIsShow] = useState(true);
-  const [array, setArray] = useState([]);
-
-  const handleClick = useCallback(
-    (e) => {
-      // console.log(count);
-      if (count < 10) {
-        setCount((prevcount) => prevcount + 1);
-      }
-    },
-    [count]
-  );
-
-  const handleAdd = useCallback(() => {
-    setArray((prevArray) => {
-      if (prevArray.some((item) => item === text)) {
-        alert("同じ要素がすでに存在します。");
-        return prevArray;
-      }
-      // const newArray = prevArray;
-      // newArray.push(1);
-      const newArray = [...prevArray, text];
-      console.log(newArray === prevArray);
-      return newArray;
-    });
-  }, [text]);
-
-  const handleDisplay = () => {
-    setIsShow((prevIsShow) => !prevIsShow);
-  };
-
-  useEffect(() => {
-    console.log(count);
-    document.body.style.backgroundColor = "lightblue";
-    return () => {
-      console.log(count);
-      document.body.style.backgroundColor = "";
-    };
-  }, []);
-
-  const handleChange = useCallback((e) => {
-    if (e.target.value.length > 5) {
-      alert("5文字以内にしてください");
-      return;
-    }
-    setText(e.target.value.trim());
-  }, []);
+  const { count, IsShow, handleClick, handleDisplay } = useCounter();
+  const { text, array, handleAdd, handleChange } = useInputArray();
+  useBgLightBlue();
 
   return (
     <div className={styles.container}>
