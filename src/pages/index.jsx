@@ -3,19 +3,19 @@ import Head from "next/head";
 import { Footer } from "../components/Footer";
 import styles from "../styles/Home.module.css";
 import { Header } from "../components/Header";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function Home() {
-  // const handleClick = useCallback((e) => {
-  //   console.log(e.target.href);
-  //   e.preventDefault();
-  // }, []);
+  const [foo, setFoo] = useState(1);
+  
+  const handleClick = (e) => {
+    setFoo((foo) => foo + 1);
+    setFoo((foo) => foo + 1);
+  };
 
   useEffect(() => {
-    console.log("マウント時");
     document.body.style.backgroundColor = "lightblue";
     return () => {
-      console.log("アンマウント時");
       document.body.style.backgroundColor = "";
     };
   }, []);
@@ -28,9 +28,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      {/* <a href="/about" onClick={handleClick}>
+      <h1>{foo}</h1>
+      <button href="/about" onClick={handleClick}>
         ボタン
-      </a> */}
+      </button>
       <Main page="index" />
       <Footer />
     </div>
